@@ -1,0 +1,8 @@
+digraph structs {
+rankdir=TB;
+110666492672304 [shape=Mrecord; style = filled; fillcolor = "#facdb5ff"; color = "#030303ff"; label="{type = OPERATION | value = ADDITION | {left = 0x64a68cfbf9e0 | right = 0x64a68cfbfa90}}";]
+110666492672480 [shape=Mrecord; style = filled; fillcolor = "#b5fab8ff"; color = "#030303ff"; label="{type = VARIABLE | value = x | {left = (nil) | right = (nil)}}";]
+110666492672656 [shape=Mrecord; style = filled; fillcolor = "#b5ebfaff"; color = "#030303ff"; label="{type = NUMBER | value = 6 | {left = (nil) | right = (nil)}}";]
+110666492672304->110666492672480[color = "#f93319ff"]
+110666492672304->110666492672656[color = "#2c07fdff"]
+}
