@@ -1,10 +1,10 @@
 digraph structs {
 rankdir=TB;
-110990818572592 [shape=Mrecord; style = filled; fillcolor = "#facdb5ff"; color = "#030303ff"; label="{type = OPERATION | value = SIN | {left = 0x64f2105079e0 | right = (nil)}}";]
-110990818572768 [shape=Mrecord; style = filled; fillcolor = "#facdb5ff"; color = "#030303ff"; label="{type = OPERATION | value = ADDITION | {left = 0x64f210507a90 | right = 0x64f210507b40}}";]
-110990818572944 [shape=Mrecord; style = filled; fillcolor = "#b5fab8ff"; color = "#030303ff"; label="{type = VARIABLE | value = x | {left = (nil) | right = (nil)}}";]
-110990818573120 [shape=Mrecord; style = filled; fillcolor = "#b5ebfaff"; color = "#030303ff"; label="{type = NUMBER | value = 2 | {left = (nil) | right = (nil)}}";]
-110990818572592->110990818572768[color = "#f93319ff"]
-110990818572768->110990818572944[color = "#f93319ff"]
-110990818572768->110990818573120[color = "#2c07fdff"]
+109161530407216 [shape=Mrecord; style = filled; fillcolor = "#facdb5ff"; color = "#030303ff"; label="{type = OPERATION | value = SIN | {left = 0x6348263e39e0 | right = (nil)}}";]
+109161530407392 [shape=Mrecord; style = filled; fillcolor = "#facdb5ff"; color = "#030303ff"; label="{type = OPERATION | value = ADDITION | {left = 0x6348263e3a90 | right = 0x6348263e3b40}}";]
+109161530407568 [shape=Mrecord; style = filled; fillcolor = "#b5fab8ff"; color = "#030303ff"; label="{type = VARIABLE | value = x | {left = (nil) | right = (nil)}}";]
+109161530407744 [shape=Mrecord; style = filled; fillcolor = "#b5ebfaff"; color = "#030303ff"; label="{type = NUMBER | value = 2 | {left = (nil) | right = (nil)}}";]
+109161530407216->109161530407392[color = "#f93319ff"]
+109161530407392->109161530407568[color = "#f93319ff"]
+109161530407392->109161530407744[color = "#2c07fdff"]
 }
