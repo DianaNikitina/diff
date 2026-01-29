@@ -86,7 +86,10 @@ typedef struct tree
     int size;
 } tree_t;
 
+
+int gramm(char* diff);
 void destroy_tree(tree_t* ptree);
+void tree_to_latex(trnode_t* node, FILE* output); 
 void destroy_all(trnode_t* root);
 char* find_sign(char* diff, int* position);
 trnode_t* make_node(char* new_sign);
@@ -107,4 +110,5 @@ double do_operation(sign_t op, double left, double right, int* error);
 double do_unary_operation(sign_t op, double operand, int* error);
 const char* sign_to_string(sign_t sign); 
 trnode_t* copy_tree(trnode_t* root);
+void generate_latex_document(trnode_t* original, trnode_t* derivative, const char* filename);
 #endif

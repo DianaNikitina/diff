@@ -19,6 +19,10 @@ int main()
 
 
     fread(diff, size_file, sizeof(char), fp);
+
+    //printf("%s\n", diff);
+    //gramm(diff);
+
     read_node(diff, &position, &ptree);
     
     print_tree(ptree.root);
@@ -54,6 +58,10 @@ int main()
     printf("write to file base of data after diff\n");
     SECTION_SEPARATOR
     write_to_file_diff(&new_ptree, "dot_files/diff.dot");
+
+    printf("go to latex\n");
+    SECTION_SEPARATOR
+    generate_latex_document(ptree.root, new_ptree.root, "latex.txt");
 
     destroy_tree(&new_ptree);
     free(diff);
