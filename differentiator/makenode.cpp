@@ -7,14 +7,23 @@ static opt_t array_opt[] =
     {"*", "MULTIPLICATION", MULTIPLICATION},
     {"/", "DIVISION", DIVISION}, 
     {"^", "DEGREE", DEGREE}, 
-    {"log", "LOGARITHM", LOGARITHM}, 
-    {"sin", "SINUS", SINUS}, 
-    {"cos", "COSINE", COSINE}, 
-    {"tg", "TANGENT", TANGENT}, 
-    {"ctg", "COTANGENT", COTANGENT},
-    {"sh", "SHINUS", SHINUS},
-    {"ch", "CHOSINUS", CHOSINUS},
-    {"th", "SHTANGENT", SHTANGENT}
+    {"log", "LOG", LOG},
+    {"ln", "LN", LN}, 
+    {"sin", "SIN", SIN}, 
+    {"cos", "COS", COS}, 
+    {"tg", "TG", TG}, 
+    {"ctg", "CTG", CTG},
+    {"exp", "EXP", EXP},
+    {"arcsin", "ARCSIN", ARCSIN},
+    {"arccos", "ARCCOS", ARCCOS},
+    {"arctg", "ARCTG", ARCTG},
+    {"arcctg", "ARCCTG", ARCCTG},
+    {"ctg", "CTG", CTG},
+    {"sh", "SH", SH},
+    {"ch", "CH", CH},
+    {"th", "TH", TH},
+    {"cth", "CTH", CTH},
+
 };
 
 trnode_t* make_node(char* new_sign)
@@ -24,74 +33,42 @@ trnode_t* make_node(char* new_sign)
 
     assert(new_node);
 
-    new_node->diff.name_type_op = func_name_type_op(new_sign);
-    new_node->diff.enum_type_op = func_enum_type_op(new_sign);
-    new_node->diff.value = func_variable(new_sign);
-    if (new_node->diff.enum_type_op == OPERATION)
-        new_node->diff.enum_value = func_enum_value(new_node->diff.value);
+    func_type_op(new_sign, new_node);
     new_node->left = NULL;
     new_node->right = NULL;
 
     return new_node;
 }
 
-const char* func_name_type_op(char* new_sign)
+int func_type_op(char* new_sign, trnode_t* new_node)
 {
     if (new_sign[0] >= '0' && new_sign[0] <= '9')
     {
-        return "NUMBER";
+        new_node->diff.name_type_op = "NUMBER";
+        new_node->diff.enum_type_op = NUMBER;
+        new_node->diff.value = new_sign;
+        return 1;
     }
     if (new_sign[0] >= 'a' && new_sign[0] <= 'z' && new_sign[1] == '\0')
     {
-        return "VARIABLE";
-    }
-    return "OPERATION";
-}
-
-type_t func_enum_type_op(char* new_sign)
-{
-    if (new_sign[0] >= '0' && new_sign[0] <= '9')
-    {
-        return NUMBER;
-    }
-    if (new_sign[0] >= 'a' && new_sign[0] <= 'z' && new_sign[1] == '\0')
-    {
-        return VARIABLE;
-    }
-    return OPERATION;
-}
-
-const char* func_variable(char* new_sign)
-{
-    if (new_sign[0] >= '0' && new_sign[0] <= '9')
-    {
-        return new_sign;
-    }
-    if (new_sign[0] >= 'a' && new_sign[0] <= 'z' && new_sign[1] == '\0')
-    {
-        return new_sign;
+        new_node->diff.name_type_op = "VARIABLE";
+        new_node->diff.enum_type_op = VARIABLE;
+        new_node->diff.value = new_sign;
+        return 1;
     }
     else 
     {
+        new_node->diff.name_type_op = "OPERATION";
+        new_node->diff.enum_type_op = OPERATION;
         for (int i = 0; i < 13; i++)
         {
             if (strcmp(new_sign, array_opt[i].name_opt) == 0)
             {
-                return array_opt[i].str_opt;
+                new_node->diff.value = array_opt[i].str_opt;
+                new_node->diff.enum_value = array_opt[i].enum_opt;
+                return 1;
             }
         }
     }
     return 0;
-}
-
-sign_t func_enum_value(const char* value)
-{
-    for (int i = 0; i < 13; i++)
-    {
-        if(strcmp(value, array_opt[i].name_opt) == 0)
-        {
-            return array_opt[i].enum_opt;
-        }
-    }
-    return ADDITION;
 }

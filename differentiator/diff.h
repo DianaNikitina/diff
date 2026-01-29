@@ -22,9 +22,9 @@ enum treeErr_t
 
 typedef enum type
 {
-    OPERATION = 13,
-    VARIABLE = 14,
-    NUMBER = 15
+    OPERATION = 20,
+    VARIABLE = 21,
+    NUMBER = 22
 } type_t;
 
 typedef enum sign
@@ -34,16 +34,24 @@ typedef enum sign
     MULTIPLICATION = 2,
     DIVISION = 3,
     DEGREE = 4,
-    LOGARITHM = 5,
-    SINUS = 6,
-    COSINE = 7,
-    TANGENT = 8,
-    COTANGENT = 9,
-    CHOSINUS = 10,
-    SHINUS = 11,
-    SHTANGENT = 12
+    LOG = 5,
+    LN = 6,
+    SIN = 7,
+    COS = 8,
+    TG = 9,
+    CTG = 10,
+    EXP = 11,
+    ARCSIN = 12,
+    ARCCOS = 13,
+    ARCTG = 14,
+    ARCCTG = 15,
+    CH = 16,
+    SH = 17,
+    TH = 18,
+    CTH = 19 
 
 } sign_t;
+
 
 typedef struct opt
 {
@@ -82,10 +90,7 @@ void destroy_tree(tree_t* ptree);
 void destroy_all(trnode_t* root);
 char* find_sign(char* diff, int* position);
 trnode_t* make_node(char* new_sign);
-const char* func_name_type_op(char* new_sign);
-type_t func_enum_type_op(char* new_sign);
-const char* func_variable(char* new_sign);
-sign_t func_enum_value(const char* value);
+int func_type_op(char* new_sign, trnode_t* new_node);
 void print_tree(trnode_t* root);
 trnode_t* read_node(char* diff, int* position, tree_t* ptree);
 size_t sizeFile(FILE* file);
@@ -95,5 +100,11 @@ void arrow_tree_diff(trnode_t* root, FILE* file);
 trnode_t* rools_diff(trnode_t* root);
 trnode_t* simple_rools(const char* name_type_op, type_t enum_type_op, const char* value);
 trnode_t* create_operation_node(sign_t operation, trnode_t* left, trnode_t* right, const char* value);
-
+trnode_t* create_number_node(double value);
+double evaluate_tree(trnode_t* root);
+double evaluate_tree_number(trnode_t* root, int* error);
+double do_operation(sign_t op, double left, double right, int* error);
+double do_unary_operation(sign_t op, double operand, int* error);
+const char* sign_to_string(sign_t sign); 
+trnode_t* copy_tree(trnode_t* root);
 #endif

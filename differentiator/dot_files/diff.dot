@@ -1,8 +1,18 @@
 digraph structs {
 rankdir=TB;
-110666492673328 [shape=Mrecord; style = filled; fillcolor = "#facdb5ff"; color = "#030303ff"; label="{type = OPERATION | value = ADDITION | {left = 0x64a68cfbfcb0 | right = 0x64a68cfbfcf0}}";]
-110666492673200 [shape=Mrecord; style = filled; fillcolor = "#b5ebfaff"; color = "#030303ff"; label="{type = NUMBER | value = 1 | {left = (nil) | right = (nil)}}";]
-110666492673264 [shape=Mrecord; style = filled; fillcolor = "#b5ebfaff"; color = "#030303ff"; label="{type = NUMBER | value = 0 | {left = (nil) | right = (nil)}}";]
-110666492673328->110666492673200[color = "#f93319ff"]
-110666492673328->110666492673264[color = "#2c07fdff"]
+98569065893664 [shape=Mrecord; style = filled; fillcolor = "#facdb5ff"; color = "#030303ff"; label="{type = OPERATION | value = MULTIPLICATION | {left = 0x59a5e6288ee0 | right = 0x59a5e6288de0}}";]
+98569065893600 [shape=Mrecord; style = filled; fillcolor = "#facdb5ff"; color = "#030303ff"; label="{type = OPERATION | value = COS | {left = 0x59a5e6288e20 | right = (nil)}}";]
+98569065893408 [shape=Mrecord; style = filled; fillcolor = "#facdb5ff"; color = "#030303ff"; label="{type = OPERATION | value = (null) | {left = 0x59a5e6288e60 | right = 0x59a5e6288ea0}}";]
+98569065893472 [shape=Mrecord; style = filled; fillcolor = "#b5fab8ff"; color = "#030303ff"; label="{type = VARIABLE | value = x | {left = (nil) | right = (nil)}}";]
+98569065893536 [shape=Mrecord; style = filled; fillcolor = "#b5ebfaff"; color = "#030303ff"; label="{type = NUMBER | value = 2 | {left = (nil) | right = (nil)}}";]
+98569065893344 [shape=Mrecord; style = filled; fillcolor = "#facdb5ff"; color = "#030303ff"; label="{type = OPERATION | value = ADDITION | {left = 0x59a5e6288d60 | right = 0x59a5e6288da0}}";]
+98569065893216 [shape=Mrecord; style = filled; fillcolor = "#b5ebfaff"; color = "#030303ff"; label="{type = NUMBER | value = 1 | {left = (nil) | right = (nil)}}";]
+98569065893280 [shape=Mrecord; style = filled; fillcolor = "#b5ebfaff"; color = "#030303ff"; label="{type = NUMBER | value = 0 | {left = (nil) | right = (nil)}}";]
+98569065893664->98569065893600[color = "#f93319ff"]
+98569065893664->98569065893344[color = "#2c07fdff"]
+98569065893600->98569065893408[color = "#f93319ff"]
+98569065893408->98569065893472[color = "#f93319ff"]
+98569065893408->98569065893536[color = "#2c07fdff"]
+98569065893344->98569065893216[color = "#f93319ff"]
+98569065893344->98569065893280[color = "#2c07fdff"]
 }

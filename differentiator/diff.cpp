@@ -29,13 +29,27 @@ int main()
     SECTION_SEPARATOR
     write_to_file_diff(&ptree, "dot_files/expression.dot");
 
+    printf("function of calc\n");
+    SECTION_SEPARATOR
+    evaluate_tree(ptree.root);
+
     printf("function of diff\n");
     SECTION_SEPARATOR
     new_ptree.root = rools_diff(ptree.root);
+    printf("correct!\n");
+    if(!new_ptree.root)
+    {
+        fprintf(stderr, "ERROR: null pointer of root\n");
+        return 1;
+    }
 
-    print_tree(new_ptree.root);
-    printf("\nCORRECT print tree after diff\n");
+    printf("function of calc\n");
     SECTION_SEPARATOR
+    evaluate_tree(new_ptree.root);
+
+    /*print_tree(new_ptree.root);
+    printf("\nCORRECT print tree after diff\n");
+    SECTION_SEPARATOR*/
 
     printf("write to file base of data after diff\n");
     SECTION_SEPARATOR

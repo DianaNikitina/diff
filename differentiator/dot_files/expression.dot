@@ -1,8 +1,10 @@
 digraph structs {
 rankdir=TB;
-110666492672304 [shape=Mrecord; style = filled; fillcolor = "#facdb5ff"; color = "#030303ff"; label="{type = OPERATION | value = ADDITION | {left = 0x64a68cfbf9e0 | right = 0x64a68cfbfa90}}";]
-110666492672480 [shape=Mrecord; style = filled; fillcolor = "#b5fab8ff"; color = "#030303ff"; label="{type = VARIABLE | value = x | {left = (nil) | right = (nil)}}";]
-110666492672656 [shape=Mrecord; style = filled; fillcolor = "#b5ebfaff"; color = "#030303ff"; label="{type = NUMBER | value = 6 | {left = (nil) | right = (nil)}}";]
-110666492672304->110666492672480[color = "#f93319ff"]
-110666492672304->110666492672656[color = "#2c07fdff"]
+98569065892144 [shape=Mrecord; style = filled; fillcolor = "#facdb5ff"; color = "#030303ff"; label="{type = OPERATION | value = SIN | {left = 0x59a5e62889e0 | right = (nil)}}";]
+98569065892320 [shape=Mrecord; style = filled; fillcolor = "#facdb5ff"; color = "#030303ff"; label="{type = OPERATION | value = ADDITION | {left = 0x59a5e6288a90 | right = 0x59a5e6288b40}}";]
+98569065892496 [shape=Mrecord; style = filled; fillcolor = "#b5fab8ff"; color = "#030303ff"; label="{type = VARIABLE | value = x | {left = (nil) | right = (nil)}}";]
+98569065892672 [shape=Mrecord; style = filled; fillcolor = "#b5ebfaff"; color = "#030303ff"; label="{type = NUMBER | value = 2 | {left = (nil) | right = (nil)}}";]
+98569065892144->98569065892320[color = "#f93319ff"]
+98569065892320->98569065892496[color = "#f93319ff"]
+98569065892320->98569065892672[color = "#2c07fdff"]
 }
