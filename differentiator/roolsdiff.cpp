@@ -24,64 +24,65 @@ trnode_t* rools_diff(trnode_t* root)
             switch(root->diff.enum_value)
             {
                 case ADDITION:
-                    return create_operation_node(ADDITION, left_diff, right_diff, "ADDITION");
-            
+                    return dADD(left_diff, right_diff);
+
                 case SUBTRACTION:
-                    return create_operation_node(SUBTRACTION, left_diff, right_diff, "SUBTRACTION");
+                    return dSUB(left_diff, right_diff);
                     
                 case MULTIPLICATION:
-                    return create_operation_node(ADDITION, create_operation_node(MULTIPLICATION, left_diff, copy_tree(root->right), "MULTIPLICATION"), create_operation_node(MULTIPLICATION, copy_tree(root->left), right_diff, "MULTIPLICATION"), "ADDITION");
+                    return dADD(dMUL(left_diff, copy_tree(root->right)), dMUL(copy_tree(root->left), right_diff));
                     
                 case DIVISION:
-                    return create_operation_node(DIVISION, create_operation_node(SUBTRACTION, create_operation_node(MULTIPLICATION, left_diff, copy_tree(root->right), "MULTIPLICATION"), create_operation_node(MULTIPLICATION, copy_tree(root->left), right_diff, "MULTIPLICATION"), "SUBTRACTION"), create_operation_node(DEGREE, copy_tree(root->right), create_number_node(2.0), "DEGREE"), "DIVISION");
-                    
+                    return dDIV(dSUB(dMUL(left_diff, copy_tree(root->right)), dMUL(copy_tree(root->left), right_diff)),dPOW(copy_tree(root->right), TWO));
+
                 case DEGREE:
-                    return create_operation_node(MULTIPLICATION, copy_tree(root), create_operation_node(ADDITION, create_operation_node(MULTIPLICATION, right_diff, create_operation_node(LN, copy_tree(root->left), NULL, "LN"),"MULTIPLICATION"), create_operation_node(MULTIPLICATION, copy_tree(root->right), create_operation_node(DIVISION, left_diff, copy_tree(root->left), "DIVISION"), "MULTIPLICATION"), "ADDITION"),"MULTIPLICATION");
-                
+                    return dMUL(copy_tree(root),dADD(dMUL(right_diff, dLN(copy_tree(root->left))),dMUL(copy_tree(root->right), dDIV(left_diff, copy_tree(root->left)))));
+
                 case SIN:
-                    return create_operation_node(MULTIPLICATION, create_operation_node(COS, copy_tree(root->left), NULL, "COS"), left_diff, "MULTIPLICATION");
-    
+                    return dMUL(dCOS(copy_tree(root->left)), left_diff);
+
                 case COS:
-                    return create_operation_node(MULTIPLICATION, create_operation_node(MULTIPLICATION, create_number_node(-1.0), create_operation_node(SIN, copy_tree(root->left), NULL, "SIN"), "MULTIPLICATION"), left_diff, "MULTIPLICATION");
-    
+                    return dMUL(dMUL(MINUS_ONE, dSIN(copy_tree(root->left))), left_diff);
+
                 case TG:
-                    return create_operation_node(MULTIPLICATION, create_operation_node(DIVISION, create_number_node(1.0), create_operation_node(DEGREE, create_operation_node(COS, copy_tree(root->left), NULL, "COS"), create_number_node(2.0), "DEGREE"), "DIVISION"), left_diff, "MULTIPLICATION");
-    
+                    return dMUL(dDIV(ONE, dPOW(dCOS(copy_tree(root->left)), TWO)), left_diff);
+
                 case CTG:
-                    return create_operation_node(MULTIPLICATION, create_operation_node(MULTIPLICATION, create_number_node(-1.0), create_operation_node(DIVISION, create_number_node(1.0), create_operation_node(DEGREE, create_operation_node(SIN, copy_tree(root->left), NULL, "SIN"), create_number_node(2.0), "DEGREE"), "DIVISION"), "MULTIPLICATION"), left_diff, "MULTIPLICATION");
-    
+                    return dMUL(dMUL(MINUS_ONE, dDIV(ONE, dPOW(dSIN(copy_tree(root->left)), TWO))), left_diff);    
+                
                 case LN:
-                    return create_operation_node(MULTIPLICATION, create_operation_node(DIVISION, create_number_node(1.0), copy_tree(root->left), "DIVISION"), left_diff, "MULTIPLICATION");
-    
+                    return dMUL(dDIV(ONE, copy_tree(root->left)), left_diff);
+
                 case LOG:
-                    return create_operation_node(MULTIPLICATION, create_operation_node(DIVISION, create_number_node(1.0), create_operation_node(MULTIPLICATION, copy_tree(root->left), create_operation_node(LN, copy_tree(root->right), NULL, "LN"), "MULTIPLICATION"), "DIVISION"), left_diff, "MULTIPLICATION");
-    
+                    return dMUL(dDIV(ONE, dMUL(copy_tree(root->left), dLN(copy_tree(root->right)))), left_diff);    
+                
                 case EXP:
-                    return create_operation_node(MULTIPLICATION, create_operation_node(EXP, copy_tree(root->left), NULL, "EXP"), left_diff, "MULTIPLICATION");
-    
+                    return dMUL(dEXP(copy_tree(root->left)), left_diff);
+
                 case ARCSIN:
-                    return create_operation_node(MULTIPLICATION, create_operation_node(DIVISION, create_number_node(1.0), create_operation_node(DEGREE, create_operation_node(SUBTRACTION, create_number_node(1.0), create_operation_node(DEGREE, copy_tree(root->left), create_number_node(2.0), "DEGREE"), "SUBTRACTION"), create_number_node(0.5), "DEGREE"), "DIVISION"), left_diff, "MULTIPLICATION");
-    
+                    return dMUL(dDIV(ONE, dSQRT(dSUB(ONE, dPOW(copy_tree(root->left), TWO)))),left_diff);
+
                 case ARCCOS: 
-                    return create_operation_node(MULTIPLICATION, create_operation_node(MULTIPLICATION, create_number_node(-1.0), create_operation_node(DIVISION, create_number_node(1.0), create_operation_node(DEGREE, create_operation_node(SUBTRACTION, create_number_node(1.0), create_operation_node(DEGREE, copy_tree(root->left), create_number_node(2.0), "DEGREE"), "SUBTRACTION"), create_number_node(0.5), "DEGREE"), "DIVISION"), "MULTIPLICATION"), left_diff, "MULTIPLICATION");
-    
+                    return dMUL(dMUL(MINUS_ONE, dDIV(ONE, dSQRT(dSUB(ONE, dPOW(copy_tree(root->left), TWO))))),left_diff);
+
                 case ARCTG:
-                    return create_operation_node(MULTIPLICATION, create_operation_node(DIVISION, create_number_node(1.0), create_operation_node(ADDITION, create_number_node(1.0), create_operation_node(DEGREE, copy_tree(root->left), create_number_node(2.0), "DEGREE"), "ADDITION"), "DIVISION"), left_diff, "MULTIPLICATION");
-    
+                    return dMUL(dDIV(ONE, dADD(ONE, dPOW(copy_tree(root->left), TWO))),left_diff); 
+
                 case ARCCTG:
-                    return create_operation_node(MULTIPLICATION, create_operation_node(MULTIPLICATION, create_number_node(-1.0), create_operation_node(DIVISION, create_number_node(1.0), create_operation_node(ADDITION, create_number_node(1.0), create_operation_node(DEGREE, copy_tree(root->left), create_number_node(2.0), "DEGREE"), "ADDITION"), "DIVISION"), "MULTIPLICATION"), left_diff, "MULTIPLICATION");
-    
+                    return dMUL(dMUL(MINUS_ONE, dDIV(ONE, dADD(ONE, dPOW(copy_tree(root->left), TWO)))),left_diff);
+
                 case SH:
-                    return create_operation_node(MULTIPLICATION, create_operation_node(CH, copy_tree(root->left), NULL, "CH"), left_diff, "MULTIPLICATION");
-    
+                    return dMUL(dCOSH(copy_tree(root->left)), left_diff); 
+
                 case CH:
-                    return create_operation_node(MULTIPLICATION, create_operation_node(SH, copy_tree(root->left), NULL, "SH"), left_diff, "MULTIPLICATION");
-    
+                    return dMUL(dSINH(copy_tree(root->left)), left_diff); 
+
                 case TH: 
-                    return create_operation_node(MULTIPLICATION, create_operation_node(DIVISION, create_number_node(1.0), create_operation_node(DEGREE, create_operation_node(CH, copy_tree(root->left), NULL, "CH"), create_number_node(2.0), "DEGREE"), "DIVISION"), left_diff, "MULTIPLICATION");
-    
+                    return dMUL(dDIV(ONE, dPOW(dCOSH(copy_tree(root->left)), TWO)), left_diff);
+
                 case CTH:
-                    return create_operation_node(MULTIPLICATION, create_operation_node(MULTIPLICATION, create_number_node(-1.0), create_operation_node(DIVISION, create_number_node(1.0), create_operation_node(DEGREE, create_operation_node(SH, copy_tree(root->left), NULL, "SH"), create_number_node(2.0), "DEGREE"), "DIVISION"), "MULTIPLICATION"), left_diff, "MULTIPLICATION");
+                    return dMUL(dMUL(MINUS_ONE, dDIV(ONE, dPOW(dSINH(copy_tree(root->left)), TWO))), left_diff);   
+
                 default:
                     break;
             }

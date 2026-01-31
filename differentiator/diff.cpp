@@ -20,7 +20,7 @@ int main()
 
     fread(diff, size_file, sizeof(char), fp);
 
-    //printf("%s\n", diff);
+    //printf("gramm - %s\n", diff);
     //gramm(diff);
 
     read_node(diff, &position, &ptree);

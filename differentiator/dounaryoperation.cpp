@@ -89,5 +89,8 @@ double do_unary_operation(sign_t op, double operand, int* error)
             
         case ARCCTG:
             return M_PI_2 - atan(operand);
+        
+        default:
+            break;
     }
 }

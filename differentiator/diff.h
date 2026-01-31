@@ -11,7 +11,41 @@
 #define SECTION_SEPARATOR printf("-----------------\n\n");
 #define TREE_OK(ptree, error) error = treeVerify(ptree); if (error != correct) treeDump(ptree, error,  __FILE__, __FUNCTION__, __LINE__);
 
+#define dADD(left, right) create_operation_node(ADDITION, left, right, "ADDITION")
+#define dSUB(left, right) create_operation_node(SUBTRACTION, left, right, "SUBTRACTION")
+#define dMUL(left, right) create_operation_node(MULTIPLICATION, left, right, "MULTIPLICATION")
+#define dDIV(left, right) create_operation_node(DIVISION, left, right, "DIVISION")
+#define dPOW(left, right) create_operation_node(DEGREE, left, right, "DEGREE")
+#define dSIN(x) create_operation_node(SIN, x, NULL, "SIN")
+#define dCOS(x) create_operation_node(COS, x, NULL, "COS")
+#define dTAN(x) create_operation_node(TG, x, NULL, "TG")
+#define dCOT(x) create_operation_node(CTG, x, NULL, "CTG")
+#define dLN(x) create_operation_node(LN, x, NULL, "LN")
+#define dLOG(base, x) create_operation_node(LOG, base, x, "LOG")
+#define dEXP(x) create_operation_node(EXP, x, NULL, "EXP")
+#define dASIN(x) create_operation_node(ARCSIN, x, NULL, "ARCSIN")
+#define dACOS(x) create_operation_node(ARCCOS, x, NULL, "ARCCOS")
+#define dATAN(x) create_operation_node(ARCTG, x, NULL, "ARCTG")
+#define dACOT(x) create_operation_node(ARCCTG, x, NULL, "ARCCTG")
+#define dSINH(x) create_operation_node(SH, x, NULL, "SH")
+#define dCOSH(x) create_operation_node(CH, x, NULL, "CH")
+#define dTANH(x) create_operation_node(TH, x, NULL, "TH")
+#define dCOTH(x) create_operation_node(CTH, x, NULL, "CTH")
+#define dSQRT(x) dPOW(x, num(0.5))
+#define num(val) create_number_node(val)
+#define ONE num(1.0)
+#define TWO num(2.0)
+#define MINUS_ONE num(-1.0)
+#define NUM_FUNCTIONS (sizeof(math_functions) / sizeof(math_functions[0]))
+
 typedef int Item;
+
+typedef struct {
+    const char* name;  
+    double (*func)(double);
+    int is_constant;   
+    double const_value;
+} MathFunction;
 
 enum treeErr_t 
 {
@@ -22,9 +56,9 @@ enum treeErr_t
 
 typedef enum type
 {
-    OPERATION = 20,
-    VARIABLE = 21,
-    NUMBER = 22
+    OPERATION = 21,
+    VARIABLE = 22,
+    NUMBER = 23
 } type_t;
 
 typedef enum sign
@@ -48,7 +82,8 @@ typedef enum sign
     CH = 16,
     SH = 17,
     TH = 18,
-    CTH = 19 
+    CTH = 19,
+    SQRT = 20 
 
 } sign_t;
 
@@ -111,4 +146,17 @@ double do_unary_operation(sign_t op, double operand, int* error);
 const char* sign_to_string(sign_t sign); 
 trnode_t* copy_tree(trnode_t* root);
 void generate_latex_document(trnode_t* original, trnode_t* derivative, const char* filename);
+int match_word(char** ptr, const char* word);
+void skip_spaces(char** ptr);
+double GetG(char** diff_ptr);
+double GetE(char** diff_ptr);
+double GetT(char** diff_ptr);
+double GetW(char** diff_ptr); 
+double GetF(char** diff_ptr);
+double GetP(char** diff_ptr);
+double GetN(char** diff_ptr);
+double cot(double x);
+double coth(double x);
+double acot(double x);
+double log2_custom(double x);
 #endif
